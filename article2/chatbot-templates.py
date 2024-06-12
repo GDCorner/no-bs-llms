@@ -4,7 +4,7 @@
 from openai import OpenAI, ChatCompletion
 from pprint import pprint
 
-# Load the model
+# Connect to the LLM server
 client = OpenAI(base_url="http://localhost:8080/",
                 api_key="local-no-key-required")
 
@@ -57,7 +57,7 @@ def format_chat_llama3(message_history):
     START_BLOCK = """<|begin_of_text|>"""
     MESSAGE_BLOCK = """<|start_header_id|>{user_id}<|end_header_id|>
 
-{system_prompt}<|eot_id|>"""
+{message_text}<|eot_id|>"""
     ASSISTANT_START = """<|start_header_id|>{user_id}<|end_header_id|>
 
 """
@@ -66,7 +66,7 @@ def format_chat_llama3(message_history):
     for message in message_history:
         chat_str += MESSAGE_BLOCK.format(
             user_id=message["role"],
-            system_prompt=message["content"]
+            message_text=message["content"]
         )
     
     # Add the assistant start block ready for the assistant to begin replying:

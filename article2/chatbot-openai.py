@@ -3,7 +3,7 @@
 
 from openai import OpenAI, ChatCompletion
 
-# Load the model
+# Connect to the LLM server
 client = OpenAI(base_url="http://localhost:8080/v1",
                 api_key="local-no-key-required")
 
